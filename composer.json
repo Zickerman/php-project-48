@@ -1,0 +1,22 @@
+{
+    "name": "hexlet/code",
+    "description": "project project to find differences in 2 files",
+    "type": "project",
+    "license": "MIT",
+    "bin": [
+        "bin/gendiff"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Application\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "aleks"
+        }
+    ],
+    "require": {
+        "docopt/docopt": "^1.0"
+    }
+}
