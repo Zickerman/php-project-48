@@ -18,3 +18,7 @@ execute in the console of the root directory:
     or just:
 
     ./bin/gendiff -h
+
+launch with 2 files (acceptable absolute paths in ```file_get_contents()```):
+
+    make gendiff param="./file1.json ./file2.json"

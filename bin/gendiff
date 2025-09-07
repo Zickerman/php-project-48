@@ -3,6 +3,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use Application\Parser;
 
 $doc = <<<DOC
 Generate diff
@@ -19,3 +20,14 @@ Options:
 DOC;
 
 $args = Docopt::handle($doc, array('version' => 'Some version let it be 1.1.1'));
+
+$firstFilePath = $args['<firstFile>'];
+$secondFilePath = $args['<secondFile>'];
+
+$parser = new Parser();
+
+$firstFileContent = $parser->parseFile($firstFilePath);
+$secondFileContent = $parser->parseFile($secondFilePath);
+
+print_r($firstFileContent);
+print_r($secondFileContent);
