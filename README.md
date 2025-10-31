@@ -22,3 +22,8 @@ execute in the console of the root directory:
 launch with 2 files (acceptable absolute paths in ```file_get_contents()```):
 
     make gendiff param="./file1.json ./file2.json"
+
+
+
+#### Посмотреть работу программы (запуск команды с параметром(пути до файлов))
+https://asciinema.org/a/jLLopy710lKHQsuKL4X1r7bSk

@@ -26,8 +26,4 @@ $secondFilePath = $args['<secondFile>'];
 
 $parser = new Parser();
 
-$firstFileContent = $parser->parseFile($firstFilePath);
-$secondFileContent = $parser->parseFile($secondFilePath);
-
-print_r($firstFileContent);
-print_r($secondFileContent);
+print_r($parser->genDiffFromFiles($firstFilePath, $secondFilePath));
