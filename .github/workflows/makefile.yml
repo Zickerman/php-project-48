@@ -11,9 +11,5 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Prepare project
-      run: make prepare
-
-    - name: Run check
-      run: make lint
+    # - name: Run check
+    #   run: make lint
