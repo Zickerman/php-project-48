@@ -1,6 +1,9 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Zickerman/php-project-48/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Zickerman/php-project-48/actions)
 
+### SonarQube tests and linter status:
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Zickerman_php-project-48&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Zickerman_php-project-48)
+
 execute in the console of the root directory:
 
   to prepare project:
