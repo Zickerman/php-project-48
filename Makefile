@@ -9,6 +9,10 @@ lint:
 # значение level чем выше - тем строже проверка
 	@vendor/bin/phpstan analyse src --level=5
 
+test:
+# запуск тестов
+	@./vendor/bin/phpunit --verbose
+
 # в param будет подставлено значение из param вот тут например: make gendiff param=-v
 gendiff:
 	@./bin/gendiff $(param)
