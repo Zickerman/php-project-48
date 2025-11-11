@@ -1,12 +1,17 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Application\Parser;
 
 class ExampleTest extends TestCase
 {
-    public function testE(): void
+    public function testGetFileContent(): void
     {
-        $this->assertTrue(true);
+        $path = __DIR__ . "/fixtures/123.json";
+        $parser = new Parser();
+
+        $content = $parser->getFileContent($path);
+        $this->assertJsonStringEqualsJsonString(json_encode(["host" => "hexlet.io", "timeout" => 50, "proxy" => "123.234.53.22", "follow" => false]), $content);
     }
 
 }
