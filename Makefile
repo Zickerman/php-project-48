@@ -12,6 +12,10 @@ lint:
 test:
 # запуск тестов
 	@./vendor/bin/phpunit --verbose
+test-coverage:
+	@mkdir -p build/logs
+	@XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-clover=build/logs/clover.xml
+
 
 # в param будет подставлено значение из param вот тут например: make gendiff param=-v
 gendiff:

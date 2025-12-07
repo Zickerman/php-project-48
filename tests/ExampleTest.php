@@ -7,7 +7,7 @@ class ExampleTest extends TestCase
 {
     public function testGetFileContent(): void
     {
-        $path = __DIR__ . "/fixtures/123.json";
+        $path = __DIR__ . "/fixtures/test.json";
         $parser = new Parser();
 
         $content = $parser->getFileContent($path);
