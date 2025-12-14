@@ -23,7 +23,8 @@ $args = Docopt::handle($doc, array('version' => 'Some version let it be 1.1.1'))
 
 $firstFilePath = $args['<firstFile>'];
 $secondFilePath = $args['<secondFile>'];
+$format = $args['--format'];
 
 $parser = new Parser();
 
-print_r($parser->genDiffFromFiles($firstFilePath, $secondFilePath));
+print_r($parser->genDiffFromFiles($firstFilePath, $secondFilePath, $format));

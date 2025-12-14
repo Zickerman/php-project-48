@@ -24,7 +24,9 @@ execute in the console of the root directory:
 
 launch with 2 files (acceptable absolute paths in ```file_get_contents()```):
 
-    make gendiff param="./file1.json ./file2.json"
+    make gendiff param="./tests/fixtures/flatJson1.json ./tests/fixtures/flatJson2.json"
+with format(e.g. stylish is default value):
+    make gendiff param="--format=stylish ./tests/fixtures/nestedYaml1.yaml ./tests/fixtures/nestedYaml2.yaml"
 
 
 
@@ -32,4 +34,7 @@ launch with 2 files (acceptable absolute paths in ```file_get_contents()```):
 https://asciinema.org/a/jLLopy710lKHQsuKL4X1r7bSk
 
 #### Посмотреть работу программы (yaml файл)
-https://asciinema.org/a/BEZNRPjY7faF8vsf81Y27cvYH
+https://asciinema.org/a/L0MX3TOhGDSeo2C0oByWw9MTf
+
+#### Посмотреть работу программы (многоуровневая вложенность)
+https://asciinema.org/a/WBnPDjn8H2crd1OYTE6dCRwYk

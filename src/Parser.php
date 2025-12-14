@@ -7,8 +7,6 @@ use function Funct\Collection\sortBy;
 
 class Parser
 {
-
-
     public function parseFile(string $path): array
     {
         $content = $this->getFileContent($path);
@@ -35,50 +33,95 @@ class Parser
         return $content;
     }
 
-    public function genDiff(array $firstFileData, array $secondFileData): string
+    private function buildDiff(array $first, array $second): array
     {
-        $allKeys = array_unique(array_merge(array_keys($firstFileData), array_keys($secondFileData)));
+        $allKeys = array_unique(array_merge(array_keys($first), array_keys($second)));
         $allKeys = sortBy($allKeys, fn($key) => $key);
 
-        $diffLines = ["\n {"];
+        $diff = [];
 
         foreach ($allKeys as $key) {
-            $inFirst = array_key_exists($key, $firstFileData);
-            $inSecond = array_key_exists($key, $secondFileData);
+            $inFirst = array_key_exists($key, $first);
+            $inSecond = array_key_exists($key, $second);
+
+            $firstValue = $inFirst ? $first[$key] : null;
+            $secondValue = $inSecond ? $second[$key] : null;
 
             if ($inFirst && !$inSecond) {
-                $diffLines[] = "  - {$key}: " . $this->stringify($firstFileData[$key]);
+                $diff[] = ['key' => $key, 'type' => 'removed', 'value' => $firstValue];
             } elseif (!$inFirst && $inSecond) {
-                $diffLines[] = "  + {$key}: " . $this->stringify($secondFileData[$key]);
-            } elseif ($firstFileData[$key] === $secondFileData[$key]) {
-                $diffLines[] = "    {$key}: " . $this->stringify($firstFileData[$key]);
+                $diff[] = ['key' => $key, 'type' => 'added', 'value' => $secondValue];
+            } elseif ($firstValue === $secondValue) {
+                $diff[] = ['key' => $key, 'type' => 'unchanged', 'value' => $firstValue];
+            } elseif (is_array($firstValue) && is_array($secondValue)) {
+                $diff[] = ['key' => $key, 'type' => 'nested', 'children' => $this->buildDiff($firstValue, $secondValue)];
             } else {
-                $diffLines[] = "  - {$key}: " . $this->stringify($firstFileData[$key]);
-                $diffLines[] = "  + {$key}: " . $this->stringify($secondFileData[$key]);
+                $diff[] = ['key' => $key, 'type' => 'changed', 'oldValue' => $firstValue, 'newValue' => $secondValue];
             }
         }
 
-        $diffLines[] = "} \n";
-
-        return implode("\n", $diffLines);
+        return $diff;
     }
 
-    private function stringify($value): string
+    private function formatStylish(array $diff, int $depth = 1): string
     {
-        if (is_bool($value)) {
-            return $value ? 'true' : 'false';
+        $indent = str_repeat(' ', ($depth - 1) * 4);
+        $lines = ["{"];
+
+        foreach ($diff as $node) {
+            $type = $node['type'];
+            $key = $node['key'];
+
+            switch ($type) {
+                case 'added':
+                    $lines[] = $indent . "  + {$key}: " . $this->stringify($node['value'], $depth + 1);
+                    break;
+                case 'removed':
+                    $lines[] = $indent . "  - {$key}: " . $this->stringify($node['value'], $depth + 1);
+                    break;
+                case 'unchanged':
+                    $lines[] = $indent . "    {$key}: " . $this->stringify($node['value'], $depth + 1);
+                    break;
+                case 'changed':
+                    $lines[] = $indent . "  - {$key}: " . $this->stringify($node['oldValue'], $depth + 1);
+                    $lines[] = $indent . "  + {$key}: " . $this->stringify($node['newValue'], $depth + 1);
+                    break;
+                case 'nested':
+                    $nested = $this->formatStylish($node['children'], $depth + 1);
+                    $lines[] = $indent . "    {$key}: {$nested}";
+                    break;
+            }
         }
-        if ($value === null) {
-            return 'null';
-        }
-        return (string) $value;
+
+        $lines[] = $indent . "}";
+
+        return implode("\n", $lines);
     }
 
-    public function genDiffFromFiles(string $firstFilePath, string $secondFilePath): string
+    private function stringify($value, int $depth): string
+    {
+        if (!is_array($value)) {
+            if (is_bool($value)) return $value ? 'true' : 'false';
+            if ($value === null) return 'null';
+            return (string) $value;
+        }
+
+        $lines = ["{"];
+        foreach ($value as $k => $v) {
+            $lines[] = str_repeat(' ', $depth * 4) . "{$k}: " . $this->stringify($v, $depth + 1);
+        }
+        $lines[] = str_repeat(' ', ($depth - 1) * 4) . "}";
+
+        return implode("\n", $lines);
+    }
+
+    public function genDiffFromFiles(string $firstFilePath, string $secondFilePath, string $format = 'stylish'): string
     {
         $firstData = $this->parseFile($firstFilePath);
         $secondData = $this->parseFile($secondFilePath);
 
-        return $this->genDiff($firstData, $secondData);
+        $diffTree = $this->buildDiff($firstData, $secondData);
+
+        return $this->formatStylish($diffTree);
     }
 }

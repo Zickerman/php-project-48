@@ -3,11 +3,11 @@
 use PHPUnit\Framework\TestCase;
 use Application\Parser;
 
-class JsonTest extends TestCase
+class JsonFlatTest extends TestCase
 {
     public function testGetFileContent(): void
     {
-        $path = __DIR__ . "/fixtures/test.json";
+        $path = __DIR__ . "/fixtures/flatJson1.json";
         $parser = new Parser();
 
         $content = $parser->getFileContent($path);

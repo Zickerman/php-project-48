@@ -17,6 +17,6 @@ test-coverage:
 	@XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-clover=build/logs/clover.xml
 
 
-# в param будет подставлено значение из param вот тут например: make gendiff param=-v
+# в param будет подставлено значение из param вот тут например: make gendiff param=-v в том числе форматер, пути к файлам и.т.д.
 gendiff:
 	@./bin/gendiff $(param)

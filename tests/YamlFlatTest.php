@@ -3,11 +3,11 @@
 use PHPUnit\Framework\TestCase;
 use Application\Parser;
 
-class YamlTest extends TestCase
+class YamlFlatTest extends TestCase
 {
     public function testGetFileContent(): void
     {
-        $path = __DIR__ . "/fixtures/test.yaml";
+        $path = __DIR__ . "/fixtures/flatYaml.yaml";
         $parser = new Parser();
         $content = $parser->getFileContent($path);
 
