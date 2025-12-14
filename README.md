@@ -30,3 +30,6 @@ launch with 2 files (acceptable absolute paths in ```file_get_contents()```):
 
 #### Посмотреть работу программы (запуск команды с параметром(пути до файлов))
 https://asciinema.org/a/jLLopy710lKHQsuKL4X1r7bSk
+
+#### Посмотреть работу программы (yaml файл)
+https://asciinema.org/a/BEZNRPjY7faF8vsf81Y27cvYH
