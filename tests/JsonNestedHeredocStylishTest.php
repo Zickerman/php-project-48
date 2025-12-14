@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use Application\Parser;
 
-class JsonNestedHeredocTest extends TestCase
+class JsonNestedHeredocStylishTest extends TestCase
 {
     public function testGenDiffNested(): void
     {

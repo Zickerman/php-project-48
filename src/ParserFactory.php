@@ -1,6 +1,10 @@
 <?php
 
-namespace Application\Parsers;
+namespace Application;
+
+use Application\Parsers\JsonParser;
+use Application\Parsers\ParserInterface;
+use Application\Parsers\YamlParser;
 
 class ParserFactory
 {

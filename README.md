@@ -23,10 +23,10 @@ execute in the console of the root directory:
     ./bin/gendiff -h
 
 launch with 2 files (acceptable absolute paths in ```file_get_contents()```):
-
-    make gendiff param="./tests/fixtures/flatJson1.json ./tests/fixtures/flatJson2.json"
+    make gendiff param="./tests/fixtures/nestedJson1.json ./tests/fixtures/nestedJson2.json"
 with format(e.g. stylish is default value):
     make gendiff param="--format=stylish ./tests/fixtures/nestedYaml1.yaml ./tests/fixtures/nestedYaml2.yaml"
+    make gendiff param="--format=plain ./tests/fixtures/nestedJson1.json ./tests/fixtures/nestedJson2.json"
 
 
 
@@ -38,3 +38,6 @@ https://asciinema.org/a/L0MX3TOhGDSeo2C0oByWw9MTf
 
 #### Посмотреть работу программы (многоуровневая вложенность)
 https://asciinema.org/a/WBnPDjn8H2crd1OYTE6dCRwYk
+
+#### Посмотреть работу программы (многоуровневая вложенность разные форматы)
+https://asciinema.org/a/vf0VQWYc0vQ49iR5TzqId9qCC
