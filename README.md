@@ -41,3 +41,6 @@ https://asciinema.org/a/WBnPDjn8H2crd1OYTE6dCRwYk
 
 #### Посмотреть работу программы (многоуровневая вложенность разные форматы)
 https://asciinema.org/a/vf0VQWYc0vQ49iR5TzqId9qCC
+
+#### Посмотреть работу программы (многоуровневая вложенность формат json)
+https://asciinema.org/a/IGfFRUyQnMJD2MDQD1nCrLtuR

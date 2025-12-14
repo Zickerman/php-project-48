@@ -2,6 +2,7 @@
 
 namespace Application;
 
+use Application\Formatters\JsonFormatter;
 use Application\Formatters\PlainFormatter;
 use Application\Formatters\StylishFormatter;
 
@@ -15,6 +16,9 @@ class FormatterFactory
                 break;
             case 'stylish':
                 $formatter = new StylishFormatter();
+                break;
+            case 'json':
+                $formatter = new JsonFormatter();
                 break;
             default:
                 throw new \Exception("Unknown format: {$format}");
