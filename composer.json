@@ -18,7 +18,8 @@
     ],
     "require": {
         "docopt/docopt": "^1.0",
-        "funct/funct": "^1.6"
+        "funct/funct": "^1.6",
+        "symfony/yaml": "^5.4"
     },
     "config": {
         "platform": {

@@ -2,10 +2,22 @@
 
 namespace Application;
 
+use Application\Parsers\ParserFactory;
 use function Funct\Collection\sortBy;
 
 class Parser
 {
+
+
+    public function parseFile(string $path): array
+    {
+        $content = $this->getFileContent($path);
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+        $parser = ParserFactory::getParser($extension);
+        return $parser->parse($content);
+    }
+
     public function getFileContent(string $path): string
     {
         $realPath = realpath($path);
@@ -21,19 +33,6 @@ class Parser
         }
 
         return $content;
-    }
-
-    public function parseFile(string $path): array
-    {
-        $content = $this->getFileContent($path);
-
-        $data = json_decode($content, true);
-
-        if ($data === null) {
-            throw new \Exception("Can't parse JSON from: {$path}");
-        }
-
-        return $data;
     }
 
     public function genDiff(array $firstFileData, array $secondFileData): string

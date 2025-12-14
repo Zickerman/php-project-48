@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use Application\Parser;
 
-class ExampleTest extends TestCase
+class JsonTest extends TestCase
 {
     public function testGetFileContent(): void
     {

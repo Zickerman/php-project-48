@@ -1,0 +1,4 @@
+name: MyApp2
+version: 1.1.0
+enabled: false
+description: 'some           description'
